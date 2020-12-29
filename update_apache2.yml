@@ -10,7 +10,7 @@
     - name: Destroy default page
       file:
         state: absent
-        path: "/var/www/html/index.nginx-debian.html"
+        path: "/var/www/html/index.html"
         
     - name: Create a new HTML file
       lineinfile:
