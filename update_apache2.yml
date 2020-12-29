@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+  
+    - name: Update repositories cache and install Apache2
+      apt:
+        name: apache2
+        update_cache: yes
+    
+    - name: Destroy default page
+      file:
+        state: absent
+        path: "/var/www/html/index.nginx-debian.html"
+        
+    - name: Create a new HTML file
+      lineinfile:
+        path: "/var/www/html/index.html"
+        line: "<html><body><h3>{{ ansible_hostname }}: Apache2 updated by AWX at {{ ansible_date_time.iso8601 }} </h3></body></html>"
+        regexp: '.*'
+        owner: root
+        group: root
+        mode: '0644'
+        create: yes
